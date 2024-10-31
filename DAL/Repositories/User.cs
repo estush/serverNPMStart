@@ -68,8 +68,8 @@ namespace DAL.Repositories
                 if (entity == null)
                 {
                     logger.LogError("The User is null");
-                    throw new ArgumentNullException(nameof(entity), "The User is null");
-                }
+                    return null;
+            }
                 return entity;
             }
             catch (Exception ex)

@@ -84,7 +84,7 @@ namespace DAL.Repositories
 
                 if (discussion == null)
                 {
-                    throw new ArgumentNullException(nameof(discussion), "The Discussion is null");
+                    return null;
                 }
                 return discussion;
             }
