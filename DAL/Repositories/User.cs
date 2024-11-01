@@ -69,7 +69,7 @@ namespace DAL.Repositories
                 {
                     logger.LogError("The User is null");
                     return null;
-            }
+                }
                 return entity;
             }
             catch (Exception ex)
