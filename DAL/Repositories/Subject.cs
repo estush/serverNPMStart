@@ -68,7 +68,7 @@ namespace DAL.Repositories
                 if (entity == null)
                 {
                     logger.LogError("The Subject is null");
-                    throw new ArgumentNullException(nameof(entity), "The subject is null");
+                    return null;
                 }
                 return entity;
             }
