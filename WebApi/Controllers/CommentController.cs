@@ -9,7 +9,7 @@ using System;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -39,8 +39,7 @@ namespace WebApi.Controllers
                 }
             }
 
-
-            [HttpGet("{id}")]
+        [HttpGet("{id}")]
             public async Task<IActionResult> GetById(int id)
             {
                 try
