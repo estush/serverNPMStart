@@ -9,7 +9,7 @@ using System;
 
 namespace WebApi.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -135,7 +135,7 @@ namespace WebApi.Controllers
                 }
             }
 
-        [HttpGet("{discussionId}")]
+        [HttpGet("discussion/{discussionId}")]
         public async Task<IActionResult> GetByDiscussionId(int discussionId)
         {
             try
