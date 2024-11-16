@@ -39,8 +39,7 @@ namespace WebApi.Controllers
                 }
             }
 
-
-            [HttpGet("{id}")]
+        [HttpGet("{id}")]
             public async Task<IActionResult> GetById(int id)
             {
                 try
@@ -136,7 +135,7 @@ namespace WebApi.Controllers
                 }
             }
 
-        [HttpGet("{discussionId}")]
+        [HttpGet("discussion/{discussionId}")]
         public async Task<IActionResult> GetByDiscussionId(int discussionId)
         {
             try
