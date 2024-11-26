@@ -68,6 +68,7 @@ namespace WebApi.Controllers
                 return StatusCode(500, "Internal Server Error"); // HTTP 500 Internal Server Error
             }
         }
+            
 
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] CreateCommentDTO newComment)
@@ -130,25 +131,49 @@ namespace WebApi.Controllers
                 return StatusCode(500, "Internal Server Error"); // HTTP 500 Internal Server Error
             }
         }
+            [HttpDelete("{id}")]
+            public async Task<IActionResult> Delete(int id)
+            {
+                try
+                {
+                    await commentService.DeleteAsync(id);
+                    return NoContent(); // HTTP 204 No Content
+                }
+                catch (ArgumentNullException ex)
+                {
+                    logger.LogError("Comment not found: " + ex.Message);
+                    return NotFound(ex.Message); // HTTP 404 Not Found
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError("Failed to delete comment: " + ex.Message);
+                    return StatusCode(500, "Internal Server Error"); // HTTP 500 Internal Server Error
+                }
+            }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet("discussion/{discussionId}")]
+        public async Task<IActionResult> GetByDiscussionId(int discussionId)
         {
             try
             {
-                await commentService.DeleteAsync(id);
-                return NoContent(); // HTTP 204 No Content
-            }
-            catch (ArgumentNullException ex)
-            {
-                logger.LogError("Comment not found: " + ex.Message);
-                return NotFound(ex.Message); // HTTP 404 Not Found
+                var comments = await commentService.GetCommentsByDiscussionIdAsync(discussionId);
+
+                if (comments == null || comments.Count == 0)
+                {
+                    return NotFound($"No comments found for discussion with ID {discussionId}");
+                }
+
+                return Ok(comments); 
             }
             catch (Exception ex)
             {
-                logger.LogError("Failed to delete comment: " + ex.Message);
-                return StatusCode(500, "Internal Server Error"); // HTTP 500 Internal Server Error
+                logger.LogError($"Failed to get comments for discussion with ID {discussionId}: {ex.Message}");
+                return StatusCode(500, "Internal Server Error"); 
             }
         }
+
+
     }
+
+
 }
