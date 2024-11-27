@@ -26,7 +26,7 @@ namespace WebApi.Controllers
             commentService = cService;
             discussionService = dService;
             logger = logService;
-            userValidations = usValidate; // אתחול של UserValidations
+            userValidations = usValidate; 
             disucssionValidations = disValidations;
         }
 
@@ -174,6 +174,5 @@ namespace WebApi.Controllers
 
 
     }
-
 
 }
